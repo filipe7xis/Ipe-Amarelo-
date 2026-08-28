@@ -487,8 +487,9 @@
       <div class="qr-box"><div id="qrcode"></div></div>
       <div>
         <h3>Leve essa ficha com você</h3>
-        <p>O QR code guarda o texto completo desta ficha — funciona offline, sem depender de link. Edite os campos acima e clique para atualizar.</p>
-        <button class="btn" onclick="updateQR()">Atualizar QR code</button>
+        <p>O QR code leva direto para este site. Se editar os campos de registro acima, clique em atualizar para gerar um QR code com o texto da ficha em vez do link (útil para impressão offline).</p>
+        <button class="btn" onclick="updateQR()">Gerar QR code com o texto da ficha</button>
+        <button class="btn" style="background:transparent; border:1px solid var(--gold); color:var(--gold); margin-left:8px;" onclick="updateQRLink()">Voltar para QR code do site</button>
       </div>
     </div>
     <div class="end-mark">Ipê-amarelo · Handroanthus chrysotrichus</div>
@@ -516,6 +517,8 @@ function buildInfoText(){
   ].join("\n");
 }
 
+const SITE_URL = "https://filipe7xis.github.io/Ipe-Amarelo-/";
+
 function updateQR(){
   document.getElementById('qrcode').innerHTML = "";
   new QRCode(document.getElementById('qrcode'), {
@@ -527,7 +530,19 @@ function updateQR(){
     correctLevel: QRCode.CorrectLevel.M
   });
 }
-updateQR();
+
+function updateQRLink(){
+  document.getElementById('qrcode').innerHTML = "";
+  new QRCode(document.getElementById('qrcode'), {
+    text: SITE_URL,
+    width: 116,
+    height: 116,
+    colorDark: "#241d17",
+    colorLight: "#f6f1e4",
+    correctLevel: QRCode.CorrectLevel.M
+  });
+}
+updateQRLink();
 
 // scroll reveal
 const observer = new IntersectionObserver((entries)=>{
